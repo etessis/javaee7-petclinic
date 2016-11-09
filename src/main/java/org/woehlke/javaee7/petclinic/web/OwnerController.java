@@ -1,5 +1,8 @@
 package org.woehlke.javaee7.petclinic.web;
 
+import org.apache.commons.mail.*;
+
+
 import org.woehlke.javaee7.petclinic.dao.OwnerDao;
 import org.woehlke.javaee7.petclinic.dao.PetDao;
 import org.woehlke.javaee7.petclinic.dao.PetTypeDao;
@@ -18,11 +21,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tw
- * Date: 06.01.14
- * Time: 16:24
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tw Date: 06.01.14 Time: 16:24 To change
+ * this template use File | Settings | File Templates.
  */
 @ManagedBean
 @SessionScoped
@@ -106,61 +106,76 @@ public class OwnerController implements Serializable {
         this.searchterm = searchterm;
     }
 
-    public String search(){
-        if(searchterm==null || searchterm.isEmpty()){
+    public String search() {
+        if (searchterm == null || searchterm.isEmpty()) {
             this.ownerList = ownerDao.getAll();
         } else {
             try {
                 this.ownerList = ownerDao.search(searchterm);
-            } catch (Exception e){
+            } catch (Exception e) {
                 this.ownerList = ownerDao.getAll();
             }
         }
         return "owners.jsf";
     }
 
-    public String getNewOwnerForm(){
+    public String getNewOwnerForm() {
         this.owner = new Owner();
         return "newOwner.jsf";
     }
 
-    public String saveNewOwner(){
+    public String saveNewOwner() {
         ownerDao.addNew(this.owner);
         this.ownerList = ownerDao.getAll();
+        
+        //envia email - inserir neste momento
+        Email email = new SimpleEmail();
+        email.setHostName("smtp.googlemail.com");
+        email.setSmtpPort(465);
+        email.setAuthenticator(new DefaultAuthenticator("username", "password"));
+        email.setSSLOnConnect(true);
+        email.setFrom("user@gmail.com");
+        email.setSubject("TestMail");
+        email.setMsg("This is a test mail ... :-)");
+        email.addTo("foo@bar.com");
+        email.send();
+
+        
+        
         return "owners.jsf";
     }
 
-    public String showOwner(long id){
+    public String showOwner(long id) {
         this.owner = ownerDao.findById(id);
         return "showOwner.jsf";
     }
 
-    public String getEditForm(){
+    public String getEditForm() {
         return "editOwner.jsf";
     }
 
-    public String saveEditedOwner(){
+    public String saveEditedOwner() {
         ownerDao.update(this.owner);
         this.ownerList = ownerDao.getAll();
         return "showOwner.jsf";
     }
 
-    public String delete(long id){
+    public String delete(long id) {
         ownerDao.delete(id);
         this.ownerList = ownerDao.getAll();
         return "owners.jsf";
     }
 
-    public String getAddNewPetForm(){
+    public String getAddNewPetForm() {
         this.pet = new Pet();
         return "addNewPet.jsf";
     }
 
-    public List<PetType> getAllPetTypes(){
+    public List<PetType> getAllPetTypes() {
         return petTypeDao.getAll();
     }
 
-    public String addNewPet(){
+    public String addNewPet() {
         PetType petType = petTypeDao.findById(this.petTypeId);
         this.pet.setType(petType);
         this.owner.addPet(this.pet);
@@ -169,13 +184,13 @@ public class OwnerController implements Serializable {
         return "showOwner.jsf";
     }
 
-    public String editPetForm(long petId){
+    public String editPetForm(long petId) {
         this.pet = petDao.findById(petId);
         this.petTypeId = this.pet.getType().getId();
         return "editPet.jsf";
     }
 
-    public String saveEditedPet(){
+    public String saveEditedPet() {
         PetType petType = petTypeDao.findById(this.petTypeId);
         this.pet.setType(petType);
         petDao.update(this.pet);
@@ -184,21 +199,21 @@ public class OwnerController implements Serializable {
         return "showOwner.jsf";
     }
 
-    public String addVisitToPetForm(long petId){
+    public String addVisitToPetForm(long petId) {
         this.pet = petDao.findById(petId);
         this.petTypeId = this.pet.getType().getId();
         this.visit = new Visit();
         return "addVisitToPet.jsf";
     }
 
-    public String saveVisit(){
+    public String saveVisit() {
         this.visit.setPet(this.pet);
         this.pet.addVisit(this.visit);
         ownerService.addNewVisit(this.visit);
         log.info("owner1: " + this.owner.toString());
         long ownerId = this.owner.getId();
         this.owner = this.ownerDao.findById(ownerId);
-        log.info("owner2: "+this.owner.toString());
+        log.info("owner2: " + this.owner.toString());
         return "showOwner.jsf";
     }
 

@@ -19,11 +19,13 @@ public class OwnerSortingBean implements Serializable {
     private SortOrder sortOrderAddress = SortOrder.unsorted;
     private SortOrder sortOrderCity = SortOrder.unsorted;
     private SortOrder sortOrderTelephone = SortOrder.unsorted;
+    private SortOrder sortOrderEmail = SortOrder.unsorted;
 
     public void setSortOrderToName(){
         sortOrderAddress = SortOrder.unsorted;
         sortOrderCity = SortOrder.unsorted;
         sortOrderTelephone = SortOrder.unsorted;
+        sortOrderEmail = SortOrder.unsorted;
         if(sortOrderName==SortOrder.ascending){
             sortOrderName = SortOrder.descending;
         } else {
@@ -35,6 +37,7 @@ public class OwnerSortingBean implements Serializable {
         sortOrderName = SortOrder.unsorted;
         sortOrderCity = SortOrder.unsorted;
         sortOrderTelephone = SortOrder.unsorted;
+        sortOrderEmail = SortOrder.unsorted;
         if(sortOrderAddress == SortOrder.ascending){
             sortOrderAddress = SortOrder.descending;
         } else {
@@ -46,6 +49,7 @@ public class OwnerSortingBean implements Serializable {
         sortOrderName = SortOrder.unsorted;
         sortOrderAddress = SortOrder.unsorted;
         sortOrderTelephone = SortOrder.unsorted;
+        sortOrderEmail = SortOrder.unsorted;
         if(sortOrderCity == SortOrder.ascending){
             sortOrderCity = SortOrder.descending;
         } else {
@@ -57,10 +61,26 @@ public class OwnerSortingBean implements Serializable {
         sortOrderName = SortOrder.unsorted;
         sortOrderAddress = SortOrder.unsorted;
         sortOrderCity = SortOrder.unsorted;
+        sortOrderEmail = SortOrder.unsorted;
         if(sortOrderTelephone == SortOrder.ascending){
             sortOrderTelephone = SortOrder.descending;
         } else {
             sortOrderTelephone = SortOrder.ascending;
+        }
+    }
+    
+    /**
+     *
+     */
+    public void setSortOrderToEmail(){
+        sortOrderName = SortOrder.unsorted;
+        sortOrderAddress = SortOrder.unsorted;
+        sortOrderCity = SortOrder.unsorted;
+        sortOrderTelephone = SortOrder.unsorted;
+        if(sortOrderEmail == SortOrder.ascending){
+            sortOrderEmail = SortOrder.descending;
+        } else {
+            sortOrderEmail = SortOrder.ascending;
         }
     }
 
@@ -94,5 +114,13 @@ public class OwnerSortingBean implements Serializable {
 
     public void setSortOrderTelephone(SortOrder sortOrderTelephone) {
         this.sortOrderTelephone = sortOrderTelephone;
+    }
+    
+    public SortOrder getSortOrderEmail() {
+        return sortOrderEmail;
+    }
+
+    public void setSortOrderEmail(SortOrder sortOrderEmail) {
+        this.sortOrderEmail = sortOrderEmail;
     }
 }

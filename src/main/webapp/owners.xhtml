@@ -14,7 +14,7 @@
                     <h:commandButton action="#{ownerController.search}" value="#{msg.search}" styleClass="btn"/>
                 </h:panelGrid>
 
-                <rich:dataTable id="ownersTable" rows="5" value="#{ownerController.ownerList}" var="owner" styleClass="table table-striped table-hover">
+                <rich:dataTable id="ownersTable" rows="6" value="#{ownerController.ownerList}" var="owner" styleClass="table table-striped table-hover">
                     <rich:column sortBy="#{owner.firstName}" sortOrder="#{ownerSortingBean.sortOrderName}">
                         <f:facet name="header">
                             <a4j:commandLink value="#{msg.name}" render="ownersTable" action="#{ownerSortingBean.setSortOrderToName}" />
@@ -40,6 +40,12 @@
                             <a4j:commandLink value="#{msg.telephone}" render="ownersTable" action="#{ownerSortingBean.setSortOrderToTelephone}" />
                         </f:facet>
                         <h:outputText id="telephone" value="#{owner.telephone}"/>
+                    </rich:column>
+                    <rich:column sortBy="#{owner.email}" sortOrder="#{ownerSortingBean.sortOrderEmail}">
+                        <f:facet name="header">
+                            <a4j:commandLink value="#{msg.email}" render="ownersTable" action="#{ownerSortingBean.setSortOrderToEmail}" />
+                        </f:facet>
+                        <h:outputText id="email" value="#{owner.email}"/>
                     </rich:column>
                 </rich:dataTable>
                 <rich:dataScroller for="ownersTable"

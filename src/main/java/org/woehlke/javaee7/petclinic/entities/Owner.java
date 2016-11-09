@@ -61,6 +61,16 @@ public class Owner {
     @NotEmpty
     @Digits(fraction = 0, integer = 10)
     private String telephone;
+    
+    @Column(name = "ativo")
+    //@NotEmpty
+    @Digits(fraction = 0, integer = 10)
+    private Integer ativo;
+    
+    @Column(name = "email")
+    @NotEmpty
+    @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
+    private String email;
 
     @IndexedEmbedded
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner",fetch = FetchType.EAGER)
@@ -115,6 +125,16 @@ public class Owner {
         return telephone;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    
+    
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
@@ -146,6 +166,7 @@ public class Owner {
         if (lastName != null ? !lastName.equals(owner.lastName) : owner.lastName != null) return false;
         if (pets != null ? !pets.equals(owner.pets) : owner.pets != null) return false;
         if (telephone != null ? !telephone.equals(owner.telephone) : owner.telephone != null) return false;
+        if (email != null ? !email.equals(owner.email) : owner.email != null) return false;
 
         return true;
     }
@@ -158,6 +179,7 @@ public class Owner {
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (city != null ? city.hashCode() : 0);
         result = 31 * result + (telephone != null ? telephone.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (pets != null ? pets.hashCode() : 0);
         return result;
     }
@@ -171,6 +193,7 @@ public class Owner {
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
                 ", telephone='" + telephone + '\'' +
+                ", e-mail='" + email + '\'' +
                 ", pets=" + pets +
                 '}';
     }
