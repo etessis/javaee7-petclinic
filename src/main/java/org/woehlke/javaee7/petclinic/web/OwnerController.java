@@ -133,10 +133,10 @@ public class OwnerController implements Serializable {
         Email email = new SimpleEmail();
         email.setHostName("smtp.gmail.com");
         email.setSmtpPort(465);
-        email.setAuthenticator(new DefaultAuthenticator("etessis", "!e2704oem@2016"));
+        email.setAuthenticator(new DefaultAuthenticator("psapucrs2016", "gremio2016"));
         email.setSSLOnConnect(true);
         email.setSSLCheckServerIdentity(true);
-        email.setFrom("etessis@gmail.com");
+        email.setFrom("psapucrs2016@gmail.com");
         email.setSubject("TestMail");
         email.setMsg("This is a test mail ... :-)");
         email.addTo(toemail);
