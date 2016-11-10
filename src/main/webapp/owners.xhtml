@@ -47,6 +47,13 @@
                         </f:facet>
                         <h:outputText id="email" value="#{owner.email}"/>
                     </rich:column>
+                    
+                    <rich:column sortBy="#{owner.email}">
+                        <f:facet name="header">
+                            <a4j:commandLink value="#{msg.ativo}" render="ownersTable" />
+                        </f:facet>
+                        <h:outputText id="ativo" value="#{owner.ativo}"/>
+                    </rich:column>
                 </rich:dataTable>
                 <rich:dataScroller for="ownersTable"
                                    page="#{ownerController.scrollerPage}"

@@ -124,23 +124,23 @@ public class OwnerController implements Serializable {
         return "newOwner.jsf";
     }
 
-    public String saveNewOwner() {
+    public String saveNewOwner() throws EmailException {
         ownerDao.addNew(this.owner);
         this.ownerList = ownerDao.getAll();
+        String toemail = this.owner.getEmail();
         
         //envia email - inserir neste momento
         Email email = new SimpleEmail();
-        email.setHostName("smtp.googlemail.com");
+        email.setHostName("smtp.gmail.com");
         email.setSmtpPort(465);
-        email.setAuthenticator(new DefaultAuthenticator("username", "password"));
+        email.setAuthenticator(new DefaultAuthenticator("etessis", "!e2704oem@2016"));
         email.setSSLOnConnect(true);
-        email.setFrom("user@gmail.com");
+        email.setSSLCheckServerIdentity(true);
+        email.setFrom("etessis@gmail.com");
         email.setSubject("TestMail");
         email.setMsg("This is a test mail ... :-)");
-        email.addTo("foo@bar.com");
-        email.send();
-
-        
+        email.addTo(toemail);
+        email.send();        
         
         return "owners.jsf";
     }

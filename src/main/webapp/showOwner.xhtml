@@ -30,6 +30,10 @@
                     <h:outputLabel value="#{msg.email}" for="email"/>
                     <h:outputText id="email"
                                  value="#{ownerController.owner.email}"/>
+                    
+                    <h:outputLabel value="#{msg.ativo}" for="ativo"/>
+                    <h:outputText id="ativo"
+                                 value="#{ownerController.owner.ativo}"/>
 
                     <h:commandButton id="edit" value="#{msg.editOwner}" style="float: left"
                                      action="#{ownerController.getEditForm()}" styleClass="btn"/>

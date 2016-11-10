@@ -63,9 +63,9 @@ public class Owner {
     private String telephone;
     
     @Column(name = "ativo")
-    //@NotEmpty
-    @Digits(fraction = 0, integer = 10)
-    private Integer ativo;
+    @NotEmpty
+    @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
+    private String ativo="0";
     
     @Column(name = "email")
     @NotEmpty
@@ -133,6 +133,14 @@ public class Owner {
         this.email = email;
     }
 
+    public String getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(String ativo) {
+        this.ativo = ativo;
+    }
+
     
     
     public void setTelephone(String telephone) {
@@ -167,6 +175,7 @@ public class Owner {
         if (pets != null ? !pets.equals(owner.pets) : owner.pets != null) return false;
         if (telephone != null ? !telephone.equals(owner.telephone) : owner.telephone != null) return false;
         if (email != null ? !email.equals(owner.email) : owner.email != null) return false;
+        //if (ativo != null ? !ativo.equals(owner.ativo) : owner.ativo != null) return false;
 
         return true;
     }
@@ -180,6 +189,7 @@ public class Owner {
         result = 31 * result + (city != null ? city.hashCode() : 0);
         result = 31 * result + (telephone != null ? telephone.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
+        //result = 31 * result + (ativo != null ? ativo.hashCode() : 0);
         result = 31 * result + (pets != null ? pets.hashCode() : 0);
         return result;
     }
@@ -194,6 +204,7 @@ public class Owner {
                 ", city='" + city + '\'' +
                 ", telephone='" + telephone + '\'' +
                 ", e-mail='" + email + '\'' +
+                ", ativo='" + ativo + '\'' +
                 ", pets=" + pets +
                 '}';
     }
