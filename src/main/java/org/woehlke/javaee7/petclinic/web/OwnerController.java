@@ -128,6 +128,7 @@ public class OwnerController implements Serializable {
         ownerDao.addNew(this.owner);
         this.ownerList = ownerDao.getAll();
         String toemail = this.owner.getEmail();
+        String pessoa = this.owner.getFirstName();
         
         //envia email - inserir neste momento
         Email email = new SimpleEmail();
@@ -138,7 +139,7 @@ public class OwnerController implements Serializable {
         email.setSSLCheckServerIdentity(true);
         email.setFrom("psapucrs2016@gmail.com");
         email.setSubject("TestMail");
-        email.setMsg("This is a test mail ... :-)");
+        email.setMsg("Olá " + pessoa + " clique no link para ativar a sua conta: link");
         email.addTo(toemail);
         email.send();        
         
