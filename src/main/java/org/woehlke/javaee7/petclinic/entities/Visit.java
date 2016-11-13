@@ -33,6 +33,18 @@ public class Visit implements Comparable<Visit> {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pet_id")
     private Pet pet;
+    
+    @NotNull
+    @Column(name = "valor")
+    private Double valor;
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public double getValor() {
+        return valor;
+    }
 
     public Long getId() {
         return id;

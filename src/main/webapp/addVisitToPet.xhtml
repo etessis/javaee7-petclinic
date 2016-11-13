@@ -39,6 +39,9 @@
                     <h:outputLabel value="#{msg.description}" for="visitDescription" />
                     <h:inputText id="visitDescription" styleClass="form-control"
                                  value="#{ownerController.visit.description}" />
+                    <h:outputLabel value="#{msg.valor}" for="visitValor" />
+                    <h:inputText id="visitDescription" styleClass="form-control"
+                                 value="#{ownerController.visit.valor}" />
                     <h:commandButton id="save" action="#{ownerController.saveVisit}" value="#{msg.save}" />
                 </h:panelGrid>
 
