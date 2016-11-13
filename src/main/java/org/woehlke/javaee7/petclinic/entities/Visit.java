@@ -33,7 +33,7 @@ public class Visit implements Comparable<Visit> {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pet_id")
     private Pet pet;
-    
+
     @NotNull
     @Column(name = "valor")
     private Double valor;
