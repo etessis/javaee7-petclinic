@@ -13,12 +13,14 @@ import org.woehlke.javaee7.petclinic.entities.PetType;
 import org.woehlke.javaee7.petclinic.entities.Visit;
 import org.woehlke.javaee7.petclinic.services.OwnerService;
 
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
+import org.woehlke.javaee7.petclinic.model.Ativo;
 
 /**
  * Created with IntelliJ IDEA. User: tw Date: 06.01.14 Time: 16:24 To change
@@ -129,6 +131,8 @@ public class OwnerController implements Serializable {
         this.ownerList = ownerDao.getAll();
         String toemail = this.owner.getEmail();
         String pessoa = this.owner.getFirstName();
+        Long id = owner.getId();
+        
         
         //envia email - inserir neste momento
         Email email = new SimpleEmail();
@@ -139,9 +143,12 @@ public class OwnerController implements Serializable {
         email.setSSLCheckServerIdentity(true);
         email.setFrom("psapucrs2016@gmail.com");
         email.setSubject("TestMail");
-        email.setMsg("Olá " + pessoa + " clique no link para ativar a sua conta: link");
+        email.setMsg("Olá " + pessoa + " clique no link para ativar a sua conta: <a href='www'>" + id);
         email.addTo(toemail);
-        email.send();        
+        email.send();
+        
+        Ativo a = new Ativo();
+        a.setAtivo(id, ownerDao);
         
         return "owners.jsf";
     }

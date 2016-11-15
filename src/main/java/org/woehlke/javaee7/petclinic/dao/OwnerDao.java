@@ -24,5 +24,7 @@ public interface OwnerDao {
     void update(Owner owner);
 
     List<Owner> search(String searchterm);
+    
+    void enableUser(Long id);
 
 }

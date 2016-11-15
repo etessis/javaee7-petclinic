@@ -34,6 +34,13 @@ public class OwnerDaoImpl implements OwnerDao {
         List<Owner> list =  q.getResultList();
         return list;
     }
+    
+    @Override
+    public void enableUser(Long id){
+         Owner owner = entityManager.find(Owner.class, id);
+         if(owner != null)
+             owner.setAtivo("1");
+    }
 
     @Override
     public void delete(long id) {
