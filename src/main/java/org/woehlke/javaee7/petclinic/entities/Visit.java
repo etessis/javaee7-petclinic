@@ -38,11 +38,11 @@ public class Visit implements Comparable<Visit> {
     @Column(name = "valor")
     private Double valor;
 
-    public void setValor(double valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 
-    public double getValor() {
+    public Double getValor() {
         return valor;
     }
 
