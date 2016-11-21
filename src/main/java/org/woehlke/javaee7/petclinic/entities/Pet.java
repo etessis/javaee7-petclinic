@@ -99,6 +99,13 @@ public class Pet implements Comparable<Pet> {
         return list;
     }
 
+    public Double getValorVisits(){
+        Double valor = 0.0;
+        for(Visit v: visits)
+            valor += v.getValor();
+        return valor;
+    }
+    
     public void setVisits(Set<Visit> visits) {
         this.visits = visits;
     }

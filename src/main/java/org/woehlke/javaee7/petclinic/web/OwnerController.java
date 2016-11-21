@@ -18,6 +18,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.logging.Logger;
 import org.woehlke.javaee7.petclinic.model.Ativo;
@@ -126,13 +128,13 @@ public class OwnerController implements Serializable {
         return "newOwner.jsf";
     }
 
-    public String saveNewOwner() throws EmailException {
+    public String saveNewOwner() throws EmailException, URISyntaxException {
         ownerDao.addNew(this.owner);
         this.ownerList = ownerDao.getAll();
         String toemail = this.owner.getEmail();
         String pessoa = this.owner.getFirstName();
-        Long id = owner.getId();
-        
+        Long id = this.owner.getId();
+        URI uri = new URI("http://localhost:8080/javaee7-petclinic-1.3-SNAPSHOT/rest/" + id);
         
         //envia email - inserir neste momento
         Email email = new SimpleEmail();
@@ -143,7 +145,7 @@ public class OwnerController implements Serializable {
         email.setSSLCheckServerIdentity(true);
         email.setFrom("psapucrs2016@gmail.com");
         email.setSubject("TestMail");
-        //email.setMsg("Olá " + pessoa + " clique no link para ativar a sua conta: <a href='www'>" + id);
+        email.setMsg("Olá " + pessoa + " clique no link para ativar a sua conta.\n" + uri);
         email.addTo(toemail);
         email.send();
         

@@ -34,6 +34,18 @@ public class Visit implements Comparable<Visit> {
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
+    @NotNull
+    @Column(name = "valor")
+    private Double valor;
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
+
     public Long getId() {
         return id;
     }
