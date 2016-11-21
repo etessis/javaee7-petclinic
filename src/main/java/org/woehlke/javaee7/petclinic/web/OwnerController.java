@@ -143,7 +143,7 @@ public class OwnerController implements Serializable {
         email.setSSLCheckServerIdentity(true);
         email.setFrom("psapucrs2016@gmail.com");
         email.setSubject("TestMail");
-        email.setMsg("Olá " + pessoa + " clique no link para ativar a sua conta: <a href='www'>" + id);
+        //email.setMsg("Olá " + pessoa + " clique no link para ativar a sua conta: <a href='www'>" + id);
         email.addTo(toemail);
         email.send();
         
